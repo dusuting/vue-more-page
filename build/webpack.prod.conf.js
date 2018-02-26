@@ -11,6 +11,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+const glob = require('glob');
+
 const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
@@ -60,7 +62,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
+    /*new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.html',
       inject: true,
@@ -73,7 +75,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
-    }),
+    }),*/
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting
@@ -142,4 +144,33 @@ if (config.build.bundleAnalyzerReport) {
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
+function getEntry(globPath) {
+  var entries = {},
+  basename, tmp, pathname;
+  glob.sync(globPath).forEach(function(entry) {
+    basename = path.basename(entry, path.extname(entry));
+    tmp = entry.split('/').splice(-3);
+    pathname = basename; // 正确输出js和html的路径
+    entries[pathname] = entry;
+  });
+  return entries;
+}
+var pages = getEntry('./src/pages/**/*.html');
+for (var pathname in pages) {
+  // 配置生成的html文件，定义路径等
+  var conf = {
+      filename: pathname + '.html',
+      template: pages[pathname], // 模板路径
+      minify: { //传递 html-minifier 选项给 minify 输出
+        removeComments: true
+      },
+    inject: 'body', // js插入位置
+    chunks: [pathname, "vendor", "manifest"] // 每个html引用的js模块，也可以在这里加上vendor等公用模块
+  };
+
+  // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
+
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
+
+}
 module.exports = webpackConfig
