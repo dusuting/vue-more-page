@@ -1,6 +1,12 @@
 <template>
   <div id="app">
     会员中心
+    <ul>
+      <li><a href="index.html">首页</a></li>
+      <li><a href="member.html">会员中心</a></li>
+      <li><a href="lognin.html">登录</a></li>
+      <li><a href="register.html">注册</a></li>
+    </ul>
     <router-view/>
   </div>
 </template>
