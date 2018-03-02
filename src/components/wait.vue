@@ -7,48 +7,36 @@
     </header>
     <div class="info_box">
       <div class="welcome">欢迎注册本系统，请如实完善资料！</div>
-      <img src="@/assets/images/registration-ype.png" alt="">
+      <img src="@/assets/images/wait.png" alt="">
       <ul class="info_step">
         <li class="one act">请选择经销商类型</li>
-        <li class="two">提交信息</li>
-        <li class="turee">上传资质</li>
-        <li class="for">等待审核</li>
+        <li class="two act">提交信息</li>
+        <li class="turee act">上传资质</li>
+        <li class="for act">等待审核</li>
         <li class="five">注册完成</li>
       </ul>
-      <div class="join">
-        <div class="distribution">
-          <div class="title">我想成为经销商</div>
-          <img src="@/assets/images/distribution.png" alt="">
-          <div>
-            <button v-on:click="distributionBut">申请</button>
-          </div>
-        </div>
-        <div class="terminal">
-          <div class="title">我想成为终端商</div>
-          <img src="@/assets/images/terminal.png" alt="">
-          <div>
-            <button v-on:click="terminalBut">申请</button>
-          </div>
-        </div>
+      <div class="success_icon">
+        <img src="@/assets/images/success.png" alt="">
       </div>
+      <div class="success_text">
+        上传成功！请耐心等待审核。
+      </div>
+      <button class="go_index" v-on:click="goIndex">返回首页</button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'RegistrationType',
+    name: 'wait',
     data () {
       return {
         msg: '注册类型'
       }
     },
     methods: {
-      distributionBut: function() {
-        console.log("经销商")
-      },
-      terminalBut: function(){
-        console.log("终端商")
+      goIndex(){
+        console.log("返回首页")
       }
     }
   }
@@ -116,44 +104,21 @@
         width: 164px;
       }
     }
-    .join{
-      padding-left: 223px;
-      font-size: 17px;
-      .distribution{
-        width: 218px;
-        float: left;
-        border-radius: 4px;
-        background: #f4f7fa;
-        padding-top: 20px;
-        margin-right: 68px;
-        border: 1px solid #e2e7ec;
-        box-sizing: border-box;
-        .title{
-          margin-bottom: 32px;
-        }
-      }
-      .terminal{
-        width: 218px;
-        float: left;
-        padding-top: 20px;
-        border-radius: 4px;
-        background: #f4f7fa;
-        border: 1px solid #e2e7ec;
-        box-sizing: border-box;
-        .title{
-          margin-bottom: 32px;
-        }
-      }
-      button{
-        color: #fff;
-        border: none;
-        border-radius: 2px;
-        background: #3d76c3;
-        padding: 3px 16px;
-        cursor: pointer;
-        font-size: 16px;
-        margin: 56px 0px 25px 0px;
-      }
+    .success_icon{
+      margin: 16px 0px 20px 0px;
+    }
+    .success_text{
+      font-size: 22px;
+    }
+    .go_index{
+      background: #3d76c3;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 2px;
+      padding: 3px 16px;
+      cursor: pointer;
+      margin-top: 16px;
     }
   }
 
