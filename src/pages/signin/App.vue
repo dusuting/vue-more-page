@@ -36,7 +36,7 @@
             </div>
             <!-- ipt-warp end -->
             <div class="remember">
-              <input type="checkbox" name=""><span>记住用户名</span>
+             <label> <input type="checkbox" name=""><span>记住用户名</span></label>
               <a href="#">忘记密码</a>
             </div>
             <div class="signin-btn">登录</div>
