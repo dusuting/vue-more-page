@@ -151,6 +151,7 @@
         background: #3d76c3;
         padding: 3px 16px;
         cursor: pointer;
+        font-size: 16px;
         margin: 56px 0px 25px 0px;
       }
     }
